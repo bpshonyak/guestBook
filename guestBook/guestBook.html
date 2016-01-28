@@ -3,12 +3,34 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  <h1>Welcome to Bogdan's Guestbook!</h1>
+  {{> guestBook}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="guestBook">
+    <form class="form-horizontal">
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Name</label>
+            <div class="col-md-4">
+                <input id="name" type="text" placeholder="John Doe" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textarea">Text Area</label>
+            <div class="col-md-4">
+                <textarea class="form-control" id="message" col="30" row="3" ></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Post Message</button>
+        </div>
+
+    </form>
 </template>
+

@@ -1,19 +1,16 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+  Template.guestBook.events(
+      {
+        "submit form": function(event){
+          event.preventDefault();
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
+          var name = $(event.target).find("input[id = name]");
+          var msg = $(event.target).find("textarea[id = message]");
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
+          alert(name.val() + ": " + msg.val());
+        }
+      }
+  );
 }
 
 if (Meteor.isServer) {
