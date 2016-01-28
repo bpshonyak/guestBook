@@ -1,1 +1,9 @@
 /* CSS declarations go here */
+.name {
+  background-color: #E9DC51;
+}
+
+.date {
+  color: #9d9d9d;
+  font-size: 10px;
+}

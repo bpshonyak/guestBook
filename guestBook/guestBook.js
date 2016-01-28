@@ -8,6 +8,11 @@ if (Meteor.isClient) {
 			{
 				"messages": function(){
 					return Messages.find( {}, {sort: {createdOn: -1} } ) || {};
+				},
+				"formatDate": function(date){
+					var newDate = moment(date).format('YYYY-MM-DD');
+					console.log(newDate);
+					return newDate;
 				}
 			}
 		);
