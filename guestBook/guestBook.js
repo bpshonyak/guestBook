@@ -1,20 +1,46 @@
+Messages = new Mongo.Collection("messages");
+
 if (Meteor.isClient) {
-  Template.guestBook.events(
-      {
-        "submit form": function(event){
-          event.preventDefault();
 
-          var name = $(event.target).find("input[id = name]");
-          var msg = $(event.target).find("textarea[id = message]");
+	Meteor.subscribe("tasks");
 
-          alert(name.val() + ": " + msg.val());
-        }
-      }
+	Template.guestBook.helpers(
+			{
+				"messages": function(){
+					return Messages.find( {}, {sort: {createdOn: -1} } ) || {};
+				}
+			}
+		);
+
+	Template.guestBook.events(
+	  {
+		"submit form": function(event){
+		  event.preventDefault();
+
+		  var name = $(event.target).find("input[id = name]");
+		  var msg = $(event.target).find("textarea[id = message]");
+
+			Messages.insert(
+				{
+					name: name.val(),
+					message: msg.val(),
+					createdOn: Date.now()
+				});
+
+			name.val("");
+			msg.val("");
+
+		}
+	  }
   );
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
+
+	  Meteor.publish("messages", function () {
+		  return Messages.find();
+	  });
+
   });
 }
