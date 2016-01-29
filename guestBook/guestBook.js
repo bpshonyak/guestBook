@@ -35,12 +35,21 @@ if (Meteor.isClient) {
 
 				name.val("");
 				msg.val("");
+
+				msg.removeClass("error");
+				name.removeClass("error");
+
 			} else {
-				//if(msg.val().length < 1){
-					msg.addClass("has-error");
-				//}
+				// TODO: remove redundancy
+				if(msg.val().length < 1){
+					msg.addClass("error");
+				} else {
+					msg.removeClass("error");
+				}
 				if(name.val().length < 1){
-					name.addClass("has-error");
+					name.addClass("error");
+				} else {
+					name.removeClass("error");
 				}
 			}
 
