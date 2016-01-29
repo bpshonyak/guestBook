@@ -25,15 +25,24 @@ if (Meteor.isClient) {
 		  var name = $(event.target).find("input[id = name]");
 		  var msg = $(event.target).find("textarea[id = message]");
 
-			Messages.insert(
-				{
-					name: name.val(),
-					message: msg.val(),
-					createdOn: Date.now()
-				});
+			if(name.val().length > 0 && msg.val().length > 0){
+				Messages.insert(
+						{
+							name: name.val(),
+							message: msg.val(),
+							createdOn: Date.now()
+						});
 
-			name.val("");
-			msg.val("");
+				name.val("");
+				msg.val("");
+			} else {
+				//if(msg.val().length < 1){
+					msg.addClass("has-error");
+				//}
+				if(name.val().length < 1){
+					name.addClass("has-error");
+				}
+			}
 
 		}
 	  }
