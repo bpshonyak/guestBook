@@ -1,5 +1,30 @@
 Messages = new Mongo.Collection("messages");
 
+Router.route('/', function () {
+	this.render('guestBook');		// render the guestbook template
+	this.layout('layout');    	// set the main layout template
+});
+
+Router.route('/about', function () {
+	this.render('about'); 		// render the guestbook template
+	this.layout('layout');    // set the main layout template
+});
+
+Router.route('/message/:id', function () {
+			this.render('message', {
+				data: function () {
+					return Messages.findOne({
+						_id: this.params.id
+					});
+				}
+			}); 		// render the guestbook template
+			this.layout('layout');    // set the main layout template
+		},
+		{
+			name: 'message.show'
+		}
+);
+
 if (Meteor.isClient) {
 
 	Meteor.subscribe("messages");
@@ -65,5 +90,5 @@ if (Meteor.isServer) {
 		  return Messages.find();
 	  });
 
-  });
+	});
 }

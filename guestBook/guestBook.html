@@ -1,49 +1,59 @@
-<head>
-  <title>guestBook</title>
-</head>
 
-<body>
-  <div class="container">
-    <h1>Welcome to Bogdan's Guestbook!</h1>
-    {{> guestBook}}
-  </div>
-</body>
+<template name="layout">
 
-<template name="guestBook">
-  <form class="form-horizontal">
+  <head>
+    <title>guestBook</title>
+  </head>
 
-      <!-- Text input-->
-      <div class="form-group">
-        <div class="col-xs-4">
-          <label class="control-label" for="textinput">Name</label>
-          <input id="name" type="text" placeholder="John Doe" class="form-control input-md">
-
-        </div>
-      </div>
-
-      <!-- Textarea -->
-      <div class="form-group">
-        <div class="col-xs-4">
-          <label class="control-label" for="textarea">Message</label>
-          <textarea class="form-control" placeholder="Hello world!" id="message" col="30" row="3" ></textarea>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary">Post Message</button>
-         </div>
-      </div>
-
-  </form>
-
-    {{#each messages}}
-      <p> <span class="name">{{name}}</span> {{message}} <span class="date">-- {{formatDate createdOn}}</span></p>
-    {{/each}}
+  <body>
+    <div class="container">
+      <h1>Welcome to Bogdan's Guestbook!</h1>
+      {{> yield}}
+    </div>
+  </body>
 
 </template>
 
-<template name="messages">
+  <template name="guestBook">
+    <form class="form-horizontal">
 
-</template>
+        <!-- Text input-->
+        <div class="form-group">
+          <div class="col-xs-4">
+            <label class="control-label" for="textinput">Name</label>
+            <input id="name" type="text" placeholder="John Doe" class="form-control input-md">
 
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+          <div class="col-xs-4">
+            <label class="control-label" for="textarea">Message</label>
+            <textarea class="form-control" placeholder="Hello world!" id="message" col="30" row="3" ></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary">Post Message</button>
+           </div>
+        </div>
+
+    </form>
+
+      {{#each messages}}
+        <a href="{{pathFor route='message.show'}}">
+          <p> <span class="name">{{name}}</span> {{message}} <span class="date">-- {{formatDate createdOn}}</span></p>
+        </a>
+      {{/each}}
+
+  </template>
+
+  <template name="about">
+    <p>This app lets you message people!</p>
+  </template>
+
+  <template name="message">
+    <p> <span class="name">{{name}}</span> {{message}} <span class="date"></span></p>
+  </template>
