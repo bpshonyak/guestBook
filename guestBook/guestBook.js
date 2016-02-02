@@ -2,7 +2,7 @@ Messages = new Mongo.Collection("messages");
 
 if (Meteor.isClient) {
 
-	Meteor.subscribe("tasks");
+	Meteor.subscribe("messages");
 
 	Template.guestBook.helpers(
 			{
