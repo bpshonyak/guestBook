@@ -7,8 +7,14 @@
 
   <body>
     <div class="container">
-      <h1>Welcome to Bogdan's Guestbook!</h1>
-      {{> yield}}
+      {{> nav}}
+      {{#if currentUser}}
+        {{> yield}}
+      {{/if}}
+
+      {{#unless currentUser}}
+        <h1>Please Login to user this app!</h1>
+      {{/unless}}
     </div>
   </body>
 
@@ -16,15 +22,6 @@
 
   <template name="guestBook">
     <form class="form-horizontal">
-
-        <!-- Text input-->
-        <div class="form-group">
-          <div class="col-xs-4">
-            <label class="control-label" for="textinput">Name</label>
-            <input id="name" type="text" placeholder="John Doe" class="form-control input-md">
-
-          </div>
-        </div>
 
         <!-- Textarea -->
         <div class="form-group">
@@ -42,7 +39,7 @@
 
     </form>
 
-      {{#each entries}}
+      {{#each messages}}
         <a href="{{pathFor route='data.show'}}">
           <p> <span class="name">{{name}}</span> {{message}} <span class="date">-- {{formatDate createdOn}}</span></p>
         </a>
@@ -56,4 +53,23 @@
 
   <template name="message">
     <p> <span class="name">{{name}}</span> {{message}} <span class="date"></span></p>
+  </template>
+
+  <template name="nav">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Guestbook</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          {{> loginButtons}} <!-- here -->
+        </ul>
+      </div>
+    </div>
   </template>

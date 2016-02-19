@@ -47,22 +47,22 @@ if (Meteor.isClient) {
 		"submit form": function(event){
 		  event.preventDefault();
 
-		  var name = $(event.target).find("input[id = name]");
 		  var msg = $(event.target).find("textarea[id = message]");
+			var name = Meteor.user().username;
 
-			if(name.val().length > 0 && msg.val().length > 0){
+			console.log(Meteor.user());
+
+			if(msg.val().length > 0){
 				Messages.insert(
 						{
-							name: name.val(),
+							name: name,
 							message: msg.val(),
 							createdOn: Date.now()
 						});
 
-				name.val("");
 				msg.val("");
 
 				msg.removeClass("error");
-				name.removeClass("error");
 
 			} else {
 				// TODO: remove redundancy
@@ -71,16 +71,17 @@ if (Meteor.isClient) {
 				} else {
 					msg.removeClass("error");
 				}
-				if(name.val().length < 1){
-					name.addClass("error");
-				} else {
-					name.removeClass("error");
-				}
 			}
 
 		}
 	  }
   );
+
+	Accounts.ui.config({
+		// options are listed in the book p. 135
+		 passwordSignupFields: "USERNAME_ONLY"
+	});
+
 }
 
 if (Meteor.isServer) {
