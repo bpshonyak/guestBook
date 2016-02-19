@@ -21,3 +21,5 @@ insecure                # Allow all DB writes from clients (for prototyping)
 twbs:bootstrap
 momentjs:moment
 iron:router
+ian:accounts-ui-bootstrap-3
+accounts-password

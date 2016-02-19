@@ -42,8 +42,8 @@
 
     </form>
 
-      {{#each messages}}
-        <a href="{{pathFor route='message.show'}}">
+      {{#each entries}}
+        <a href="{{pathFor route='data.show'}}">
           <p> <span class="name">{{name}}</span> {{message}} <span class="date">-- {{formatDate createdOn}}</span></p>
         </a>
       {{/each}}
